@@ -1,0 +1,10 @@
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\bin\Debug\netcoreapp3.1\DatabasLayer.deps.json
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\bin\Debug\netcoreapp3.1\DatabasLayer.dll
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\bin\Debug\netcoreapp3.1\DatabasLayer.pdb
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\obj\Debug\netcoreapp3.1\DatabasLayer.csproj.AssemblyReference.cache
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\obj\Debug\netcoreapp3.1\DatabasLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\obj\Debug\netcoreapp3.1\DatabasLayer.AssemblyInfoInputs.cache
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\obj\Debug\netcoreapp3.1\DatabasLayer.AssemblyInfo.cs
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\obj\Debug\netcoreapp3.1\DatabasLayer.csproj.CoreCompileInputs.cache
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\obj\Debug\netcoreapp3.1\DatabasLayer.dll
+D:\Git_1\FundooNotes\Fundoo_Notes\DatabasLayer\obj\Debug\netcoreapp3.1\DatabasLayer.pdb
