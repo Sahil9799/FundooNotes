@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Services.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace RepositoryLayer.Services
 {

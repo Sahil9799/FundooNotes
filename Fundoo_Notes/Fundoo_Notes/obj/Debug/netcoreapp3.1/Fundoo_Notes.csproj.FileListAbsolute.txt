@@ -7,6 +7,7 @@ D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Fundoo_No
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Fundoo_Notes.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Fundoo_Notes.pdb
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Humanizer.dll
+D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -28,7 +29,11 @@ D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
@@ -59,6 +64,7 @@ D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\Fundoo_No
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\Fundoo_Notes.AssemblyInfoInputs.cache
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\Fundoo_Notes.AssemblyInfo.cs
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\Fundoo_Notes.csproj.CoreCompileInputs.cache
+D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\Fundoo_Notes.MvcApplicationPartsAssemblyInfo.cs
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\Fundoo_Notes.MvcApplicationPartsAssemblyInfo.cache
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\staticwebassets\Fundoo_Notes.StaticWebAssets.Manifest.cache
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\obj\Debug\netcoreapp3.1\Fundoo_Notes.RazorTargetAssemblyInfo.cache
