@@ -40,21 +40,33 @@ namespace Fundoo_Notes
             options.UseSqlServer(Configuration.GetConnectionString("Fundoo_Notes")));
 
 
+            var secret = this.Configuration.GetSection("JwtConfig").GetSection("SecretKey").Value;
+            var key = Encoding.ASCII.GetBytes(secret);
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
+                //x.RequireHttpsMetadata = false;
+                //x.SaveToken = true;
+                //x.TokenValidationParameters = new TokenValidationParameters
+                //{
+                //    ValidateIssuerSigningKey = true,
+                //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("THIS_IS_MY_KEY_TO_GENERATE_TOKEN")),
+                //    ValidateIssuer = false,
+                //    ValidateAudience = false
+
+                //};
+
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("THIS_IS_MY_KEY_TO_GENERATE_TOKEN")),
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
-
+                    ValidateAudience = false,
+                    ValidIssuer = "localhost",
+                    ValidAudience = "localhost"
                 };
             });
 
@@ -100,8 +112,9 @@ namespace Fundoo_Notes
             }
 
             app.UseHttpsRedirection();
+            app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
@@ -110,9 +123,7 @@ namespace Fundoo_Notes
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fundoo_Notes");
             });
 
-            app.UseRouting();
 
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -121,4 +132,3 @@ namespace Fundoo_Notes
         }
     }
 }
-

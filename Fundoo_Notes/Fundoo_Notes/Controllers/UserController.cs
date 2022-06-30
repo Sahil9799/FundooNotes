@@ -26,24 +26,50 @@ namespace Fundoo_Notes.Controllers
         {
             try
             {
-                
+
                 var user = fundooContext.Users.FirstOrDefault(u => u.Email == userPostModel.Email);
                 if (user != null)
                 {
                     return this.BadRequest(new { success = false, message = "Email Already Exits" });
-
                 }
-
-
                 this.userBL.AddUser(userPostModel);
                 return this.Ok(new { success = true, message = "Registration Successfull" });
-
-                //when request get succeded we get 2oo
+                //when request get succeded we get 2oo 
             }
             catch (Exception e)
             {
                 throw e;
             }
         }
+
+        [HttpPost("Login")]
+        public IActionResult LogIn(string email, string password)
+        {
+            try
+            {
+
+                var user = fundooContext.Users.FirstOrDefault(u => u.Email == email);
+                string Password = PwdEncryptDecryptService.DecryptPassword(user.Password);
+                if (user == null)
+                {
+                    return this.BadRequest(new { success = false, message = "Email doesn't Exits" });
+                }
+
+                var userdata1 = fundooContext.Users.FirstOrDefault(u => u.Email == email && Password == password);
+                if (userdata1 == null)
+                {
+                    return this.BadRequest(new { success = false, message = "Password is Invalid" });
+                }
+
+                string token = this.userBL.LogInUser(email, password);
+                return this.Ok(new { success = true, message = "Log Successfull" });
+                //when request get succeded we get 2oo 
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }
