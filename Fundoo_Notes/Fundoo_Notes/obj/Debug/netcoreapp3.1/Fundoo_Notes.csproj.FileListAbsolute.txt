@@ -6,6 +6,7 @@ D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Fundoo_No
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Fundoo_Notes.runtimeconfig.dev.json
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Fundoo_Notes.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Fundoo_Notes.pdb
+D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Experimental.System.Messaging.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Humanizer.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Git_1\FundooNotes\Fundoo_Notes\Fundoo_Notes\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll

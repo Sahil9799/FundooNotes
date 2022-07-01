@@ -114,6 +114,8 @@ namespace Fundoo_Notes
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
             app.UseSwagger();
 
