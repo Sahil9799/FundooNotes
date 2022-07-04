@@ -37,8 +37,7 @@ namespace Fundoo_Notes
         {
             services.AddControllers();
             services.AddDbContext<FundooContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Fundoo_Notes")));
-
+            options.UseSqlServer(Configuration.GetConnectionString("Fundoo_Note")));
 
             var secret = this.Configuration.GetSection("JwtConfig").GetSection("SecretKey").Value;
             var key = Encoding.ASCII.GetBytes(secret);
@@ -70,7 +69,6 @@ namespace Fundoo_Notes
                 };
             });
 
-
             services.AddSwaggerGen(setup =>
             {
                 // Include 'SecurityScheme' to use JWT Authentication
@@ -91,16 +89,17 @@ namespace Fundoo_Notes
                 };
 
                 setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
-
                 setup.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     { jwtSecurityScheme, Array.Empty<string>() }
                 });
-
             });
 
             services.AddTransient<IUserBL, UserBL>();
             services.AddTransient<IUserRL, UserRL>();
+
+            services.AddTransient<INoteBL, NoteBL>();
+            services.AddTransient<INoteRL, NoteRL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,11 +111,13 @@ namespace Fundoo_Notes
             }
 
             app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseAuthentication();
 
             app.UseAuthorization();
+
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
@@ -124,8 +125,6 @@ namespace Fundoo_Notes
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fundoo_Notes");
             });
-
-
 
             app.UseEndpoints(endpoints =>
             {
