@@ -30,6 +30,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public async Task DeleteNote(int UserId, int noteId)
+        {
+            try
+            {
+                await this.noteRL.DeleteNote(UserId, noteId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<List<Note>> GetAllNote(int UserId)
         {
             try

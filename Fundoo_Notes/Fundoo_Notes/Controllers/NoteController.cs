@@ -68,5 +68,29 @@ namespace Fundoo_Notes.Controllers
                 throw e;
             }
         }
+
+        [Authorize]
+        [HttpDelete("{NoteId}")]
+        public async Task<ActionResult> DeleteNote(int NoteId)
+        {
+            try
+            {
+                var currentUser = HttpContext.User;
+                int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+
+                var note = fundooContext.Notes.FirstOrDefault(u => u.UserId == userId && u.NoteId == NoteId);
+                if (note == null)
+                {
+                    return this.BadRequest(new { success = false, message = "Sorry..!,Your Note doesn't exist create one" });
+                }
+                await this.noteBL.DeleteNote(userId, NoteId);
+
+                return this.Ok(new { success = true, message = $"Note Deleted Successfully for the note, {note.Title} " });
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
