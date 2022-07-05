@@ -37,7 +37,7 @@ namespace Fundoo_Notes
         {
             services.AddControllers();
             services.AddDbContext<FundooContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Fundoo_Note")));
+            options.UseSqlServer(Configuration.GetConnectionString("Fundoo_Notes")));
 
             var secret = this.Configuration.GetSection("JwtConfig").GetSection("SecretKey").Value;
             var key = Encoding.ASCII.GetBytes(secret);

@@ -3,43 +3,70 @@ using DatabasLayer.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Services;
+using RepositoryLayer.Services.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fundoo_Notes.Controllers
 
-  
+
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class NoteController : ControllerBase
     {
-        [ApiController]
-        [Route("[controller]")]
-        public class NoteController : ControllerBase
+        INoteBL noteBL;
+        FundooContext fundooContext;
+
+        public NoteController(INoteBL noteBL, FundooContext fundooContext)
         {
-            INoteBL noteBL;
-            FundooContext fundooContext;
+            this.noteBL = noteBL;
+            this.fundooContext = fundooContext;
+        }
 
-            public NoteController(INoteBL noteBL, FundooContext fundooContext)
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> AddNote(NotePostModel notePostModel)
+        {
+            try
             {
-                this.noteBL = noteBL;
-                this.fundooContext = fundooContext;
+                var currentUser = HttpContext.User;
+                int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+                await this.noteBL.AddNote(userId, notePostModel);
+                return this.Ok(new { success = true, message = "Note Added Sucessfully" });
             }
-
-            [Authorize]
-            [HttpPost]
-            public async Task<ActionResult> AddNote(NotePostModel notePostModel)
+            catch (Exception e)
             {
-                try
-                {
-                    var currentUser = HttpContext.User;
-                    int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
-                    await this.noteBL.AddNote(userId, notePostModel);
-                    return this.Ok(new { success = true, message = "Note Added Sucessfully" });
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+                throw e;
             }
+        }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> GetAllNote()
+        {
+            try
+            {
+                var currentUser = HttpContext.User;
+                int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+
+                var note = fundooContext.Notes.FirstOrDefault(u => u.UserId == userId);
+                if (note == null)
+                {
+                    return this.BadRequest(new { success = false, message = "Your Note doesn't exist" });
+                }
+                List<Note> list = new List<Note>();
+                list = await this.noteBL.GetAllNote(userId);
+
+                return this.Ok(new { sucsess = true, message = "Getting your all note successfully", data = list });
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
+}
