@@ -45,6 +45,51 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public async Task ArchiveNote(int UserId, int noteId)
+        {
+            try
+            {
+                var note = fundooContext.Notes.Where(x => x.UserId == UserId && x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    if (note.IsTrash == false)
+                    {
+                        if (note.IsArchive == false)
+                        {
+                            note.IsArchive = true;
+                        }
+                        else
+                        {
+                            note.IsArchive = false;
+                        }
+                    }
+                }
+                await fundooContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task ChangeColorNote(int UserId, int noteId, string color)
+        {
+            try
+            {
+                var note = fundooContext.Notes.Where(x => x.UserId == UserId && x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Colour = color;
+                    await fundooContext.SaveChangesAsync();
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task DeleteNote(int UserId, int noteId)
         {
             try
@@ -91,6 +136,81 @@ namespace RepositoryLayer.Services
                     return null;
                 }
                 return await fundooContext.Notes.FirstOrDefaultAsync(u => u.UserId == UserId && u.NoteId == noteId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task PinNote(int UserId, int noteId)
+        {
+            try
+            {
+                var note = fundooContext.Notes.Where(x => x.UserId == UserId && x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    if (note.IsTrash == false)
+                    {
+                        if (note.IsPin == false)
+                        {
+                            note.IsPin = true;
+                        }
+                        else
+                        {
+                            note.IsPin = false;
+                        }
+                    }
+                }
+                await fundooContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task ReminderNote(int UserId, int noteId, DateTime dateTime)
+        {
+            try
+            {
+                var note = fundooContext.Notes.Where(x => x.UserId == UserId && x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    if (note.IsReminder == true)
+                    {
+                        note.Reminder = dateTime;
+                    }
+                    else
+                    {
+                        note.IsReminder = false;
+                    }
+                }
+                await fundooContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task TrashNote(int UserId, int noteId)
+        {
+            try
+            {
+                var note = fundooContext.Notes.Where(x => x.UserId == UserId && x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    if (note.IsTrash == false)
+                    {
+                        note.IsTrash = true;
+                    }
+                    else
+                    {
+                        note.IsTrash = false;
+                    }
+                }
+                await fundooContext.SaveChangesAsync();
             }
             catch (Exception e)
             {
