@@ -1,4 +1,5 @@
-﻿using DatabasLayer.User;
+﻿using DatabasLayer.Note.DatabaseLayer.Note;
+using DatabasLayer.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Interfaces;
@@ -16,8 +17,6 @@ namespace RepositoryLayer.Services
         FundooContext fundooContext;
 
         IConfiguration configuration;
-
-        //private readonly string _secret;
 
         public NoteRL(FundooContext fundooContext, IConfiguration configuration)
         {
@@ -77,6 +76,48 @@ namespace RepositoryLayer.Services
             }
             catch (Exception e)
             {
+                throw e;
+            }
+        }
+
+        public async Task<Note> GetNote(int UserId, int noteId)
+        {
+            try
+            {
+                var note = fundooContext.Notes.Where(u => u.UserId == UserId && u.NoteId == noteId).FirstOrDefault();
+
+                if (note == null)
+                {
+                    return null;
+                }
+                return await fundooContext.Notes.FirstOrDefaultAsync(u => u.UserId == UserId && u.NoteId == noteId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task UpdateNote(int UserId, int noteId, NoteUpdateModel noteUpdateModel)
+        {
+            try
+            {
+                var note = fundooContext.Notes.Where(x => x.UserId == UserId && x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Title = noteUpdateModel.Title;
+                    note.Description = noteUpdateModel.Description;
+                    note.Colour = noteUpdateModel.Colour;
+                    note.IsArchive = noteUpdateModel.IsArchive;
+                    note.IsPin = noteUpdateModel.IsPin;
+                    note.IsReminder = noteUpdateModel.IsReminder;
+                    note.IsTrash = noteUpdateModel.IsTrash;
+                    await fundooContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception e)
+            {
+
                 throw e;
             }
         }
