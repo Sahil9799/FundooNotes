@@ -18,11 +18,15 @@ namespace RepositoryLayer.Services
         IConfiguration configuration;
         private readonly string _secret;
 
+
+
         public UserRL(FundooContext fundooContext, IConfiguration configuration)
         {
             this.fundooContext = fundooContext;
             this.configuration = configuration;
             this._secret = configuration.GetSection("JwtConfig").GetSection("SecretKey").Value;
+
+
         }
         public void AddUser(UserPostModel userPostModel)
         {
@@ -51,27 +55,29 @@ namespace RepositoryLayer.Services
                 var user = fundooContext.Users.Where(u => u.Email == Email).FirstOrDefault();
                 if (user != null)
                 {
-                    string password = PwdEncryptDecryptService.DecryptPassword(user.Password);
+                    var password = PwdEncryptDecryptService.DecryptPassword(user.Password);//
 
                     if (password == Password)
                     {
                         return GenerateJwtToken(Email, user.UserId);
                     }
-                    throw new Exception("Password is invalid");
+                    throw new Exception("Password is Invalid");
                 }
-
                 throw new Exception("Email doesn't Exist");
             }
+
+
             catch (Exception e)
             {
                 throw e;
             }
         }
 
-        private string GenerateJwtToken(string email, int userId)
+        private string GenerateJwtToken(string email, object userId)
         {
             try
             {
+
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(this._secret);
                 var tokenDescriptor = new SecurityTokenDescriptor
@@ -81,21 +87,25 @@ namespace RepositoryLayer.Services
                     new Claim(ClaimTypes.Email, email),
                     new Claim("UserId", userId.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(15),
+                    Expires = DateTime.UtcNow.AddMinutes(60),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
+
                 return tokenHandler.WriteToken(token);
             }
             catch (Exception e)
             {
                 throw e;
             }
+
+
         }
 
         public bool ForgetPassword(string Email)
         {
+
             try
             {
                 var user = fundooContext.Users.Where(u => u.Email == Email).FirstOrDefault();
@@ -124,16 +134,19 @@ namespace RepositoryLayer.Services
                     MyMessage.Label = "Forget Password Email";
                     queue.Send(MyMessage);
 
+
                     Message msg = queue.Receive();
                     msg.Formatter = new BinaryMessageFormatter();
                     EmailService.SendEmail(Email, msg.Body.ToString());
                     queue.ReceiveCompleted += new ReceiveCompletedEventHandler(msmqQueue_ReceiveCompleted);
+
                     queue.BeginReceive();
                     queue.Close();
+
+
                     return true;
                 }
             }
-
             catch (Exception e)
             {
                 throw e;
@@ -148,11 +161,12 @@ namespace RepositoryLayer.Services
                 Message msg = queue.EndReceive(e.AsyncResult);
                 EmailService.SendEmail(e.Message.ToString(), GenerateToken(e.Message.ToString()));
                 queue.BeginReceive();
+
             }
             catch (MessageQueueException ex)
             {
                 if (ex.MessageQueueErrorCode ==
-                   MessageQueueErrorCode.AccessDenied)
+                    MessageQueueErrorCode.AccessDenied)
                 {
                     Console.WriteLine("Access is denied. " +
                         "Queue might be a system queue.");
@@ -173,7 +187,7 @@ namespace RepositoryLayer.Services
                     new Claim(ClaimTypes.Email,Email)
 
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(50),
+                    Expires = DateTime.UtcNow.AddMinutes(60),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
@@ -197,6 +211,7 @@ namespace RepositoryLayer.Services
                 {
                     return false;
                 }
+
                 if (userPasswordModel.Password == userPasswordModel.ConfirmPassword)
                 {
                     user.Password = PwdEncryptDecryptService.EncryptPassword(userPasswordModel.Password);
