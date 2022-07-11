@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Interfaces;
+using DatabasLayer.Label;
 using RepositoryLayer.Interfaces;
 using RepositoryLayer.Services.Entities;
 using System;
@@ -57,6 +58,18 @@ namespace BusinessLayer.Services
             try
             {
                 return await this.labelRL.GetLabel(userid, noteid);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<LabelResponseModel>> GetLabel_Join(int userid)
+        {
+            try
+            {
+                return await this.labelRL.GetLabel_Join(userid);
             }
             catch (Exception e)
             {

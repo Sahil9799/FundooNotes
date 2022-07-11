@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Interfaces;
+using DatabasLayer.Label;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Services;
 using RepositoryLayer.Services.Entities;
@@ -175,4 +177,30 @@ namespace Fundoo_Notes.Controllers
             }
         }
     }
+    [Authorize]
+    [HttpGet("GetLabel_Join")]
+
+    public async Task<ActionResult> GetLabel_Join()
+    {
+        try
+        {
+            var currentUser = HttpContext.User;
+            var UserId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+
+            var label = fundooContext.Labels.FirstOrDefault(u => u.UserId == UserId);
+            if (label == null)
+            {
+                this.BadRequest(new { success = false, Message = "Label doesn't exist" });
+            }
+            List<LabelResponseModel> labelList = new List<LabelResponseModel>();
+            labelList = await this.labelBL.GetLabel_Join(UserId);
+            return Ok(new { success = true, Message = $"Note Obtained successfully ", data = labelList });
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
+
 }
+
